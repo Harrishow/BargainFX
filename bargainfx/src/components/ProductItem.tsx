@@ -4,7 +4,7 @@ import { Product } from '../types/Product';
 
 interface ProductItemProps {
   product: Product;
-  onPress: () => void; // Adicione a prop onPress
+  onPress: () => void;
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product, onPress }) => {
@@ -18,6 +18,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product, onPress }) => {
     </TouchableOpacity>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

@@ -15,7 +15,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState(0);
 
   const addToCart = () => {
-    setCartItems((prev) => prev + 1); // Incrementa a quantidade de itens no carrinho
+    setCartItems((prev) => prev + 1);
   };
 
   return (

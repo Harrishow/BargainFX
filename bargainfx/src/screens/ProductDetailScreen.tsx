@@ -1,21 +1,32 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { ProductDetailScreenRouteProp } from '../types/navigation';
-import { useCart } from '../context/CartContext'; // Importe o hook useCart
+import { useCart } from '../context/CartContext';
 
 interface ProductDetailScreenProps {
   route: ProductDetailScreenRouteProp;
   navigation: any;
+  buttonTitle?: string;
+  buttonColor?: string;
+  buttonStyle?: object;
+  buttonTextStyle?: object;
 }
 
-const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route, navigation }) => {
+const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ 
+  route, 
+  navigation, 
+  buttonTitle = "Adicionar ao carrinho", 
+  buttonColor = "#dc2626",
+  buttonStyle = {},
+  buttonTextStyle = {}
+}) => {
   const { product } = route.params;
-  const { addToCart } = useCart(); // Use o hook useCart
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart(); // Adiciona o produto ao carrinho
+    addToCart();
     alert(`${product.name} adicionado ao carrinho!`);
-    navigation.navigate('Cart'); // Redireciona para a tela do carrinho
+    navigation.navigate('Cart'); 
   };
 
   return (
@@ -25,7 +36,13 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route, naviga
       <Text style={styles.description}>{product.description}</Text>
       <Text style={styles.price}>${product.price.toFixed(2)}</Text>
 
-      <Button title="Adicionar ao carrinho" onPress={handleAddToCart} />
+      {}
+      <TouchableOpacity 
+        style={[styles.button, { backgroundColor: buttonColor }, buttonStyle]} 
+        onPress={handleAddToCart}
+      >
+        <Text style={[styles.buttonText, buttonTextStyle]}>{buttonTitle}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -33,13 +50,16 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route, naviga
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#fff8dd',
+    padding: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   image: {
     width: '100%',
     height: 200,
     resizeMode: 'cover',
-    marginBottom: 16,
+    marginBottom: 20,
   },
   name: {
     fontSize: 24,
@@ -49,11 +69,28 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 8,
+    textAlign: 'justify',
   },
   price: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#888',
+    color: 'yellowgreen',
+    marginTop: 5,
+    marginBottom: 16,
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    width: 220,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 
