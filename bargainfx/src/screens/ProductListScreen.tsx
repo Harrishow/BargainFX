@@ -92,7 +92,7 @@ const ProductListScreen: React.FC<ProductListScreenProps> = ({ navigation }) => 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff8dd',
+    backgroundColor: '#ffeee0',
     padding: 16,
   },
 });

@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Text } from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { LoginScreenNavigationProp } from '../types/navigation';
+import LoginButton from '../components/LoginButton';
 
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
@@ -36,7 +37,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     setTimeout(() => {
       if (values.login === 'Harrison' && values.password === '12345678') {
         alert('Login bem-sucedido!');
-        navigation.navigate('Lista_de_Produtos');
+        navigation.navigate('ProductList');
       } else {
         alert('Credenciais inválidas!');
       }
@@ -87,10 +88,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 <Text style={styles.error}>{errors.password}</Text>
               )}
 
-              <Button
+              <LoginButton
                 title={isSubmitting ? 'Entrando...' : 'Entrar'}
                 onPress={() => handleSubmit()}
-                color={'#dc2626'}
+                buttonStyle={styles.loginButton}
+                textStyle={styles.loginButtonText}
                 disabled={isSubmitting}
               />
             </View>
@@ -103,12 +105,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1, // Preenche toda a tela
+    flex: 1,
     justifyContent: 'center',
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 213, 135, 0.5)',
+    backgroundColor: '#ffeee0',
     justifyContent: 'flex-start',
     padding: 50,
   },
@@ -131,6 +133,17 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 12,
     marginBottom: 8,
+  },
+  loginButton: {
+    backgroundColor: '#dc2626',
+    marginTop: 15,
+    width: 258,
+    height: 45,
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  loginButtonText: {
+    color: '#fff',
   },
   
 });

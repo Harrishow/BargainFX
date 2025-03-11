@@ -50,7 +50,7 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff8dd',
+    backgroundColor: '#ffeee0',
     padding: 20,
     justifyContent: 'flex-start',
     alignItems: 'center',
