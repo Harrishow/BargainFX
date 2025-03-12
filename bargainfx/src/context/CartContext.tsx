@@ -1,8 +1,10 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { Product } from '../types/Product';
 
 interface CartContextType {
-  cartItems: number;
-  addToCart: () => void;
+  cartItems: Product[];
+  addToCart: (product: Product) => void;
+  totalPrice: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -12,14 +14,16 @@ interface CartProviderProps {
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState(0);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
-  const addToCart = () => {
-    setCartItems((prev) => prev + 1);
+  const addToCart = (product: Product) => {
+    setCartItems((prev) => [...prev, product]);
   };
+  // Calcula o preço total dos itens no carrinho
+  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, totalPrice }}>
       {children}
     </CartContext.Provider>
   );

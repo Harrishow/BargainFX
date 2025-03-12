@@ -24,9 +24,9 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart();
+    addToCart(product); // Adiciona o produto ao carrinho
     alert(`${product.name} adicionado ao carrinho!`);
-    navigation.navigate('Cart'); 
+    navigation.navigate('Cart');
   };
 
   return (

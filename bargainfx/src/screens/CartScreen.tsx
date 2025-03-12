@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useCart } from '../context/CartContext';
 import { CartScreenNavigationProp } from '../types/navigation';
 import CustomButton from '../components/CustomButton';
@@ -11,6 +11,8 @@ interface CartScreenProps {
 
 const CartScreen: React.FC<CartScreenProps> = ({ navigation }) => {
   const { cartItems } = useCart();
+  
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   const handleGoToPayment = () => {
     navigation.navigate('Payment');
@@ -21,8 +23,20 @@ const CartScreen: React.FC<CartScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Carrinho de Compras</Text>
-      <Text style={styles.itemCount}>Itens no carrinho: {cartItems}</Text>
+      <Text style={styles.title}>Carrinho de Compras 🛒</Text>
+      
+      <FlatList
+        data={cartItems}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.productItem}>
+            <Text style={styles.productName}>{item.name}</Text>
+            <Text style={styles.productPrice}>${item.price.toFixed(2)}</Text>
+          </View>
+        )}
+      />
+      
+      <Text style={styles.totalPrice}>Total: ${totalPrice.toFixed(2)}</Text>
 
       
       <CustomButton2
@@ -46,7 +60,7 @@ const CartScreen: React.FC<CartScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 50,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#ffeee0',
@@ -56,13 +70,33 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
   },
-  itemCount: {
-    fontSize: 18,
-    marginBottom: 20,
+  productItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
+  productName: {
+    fontSize: 16,
+    marginRight: 10,
+  },
+  productPrice: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  totalPrice: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 16,
+    textAlign: 'right',
+  },
+  
+////////////////////////
+
   paymentButton: {
     backgroundColor: '#dc2626',
-    marginTop: 20,
+    marginTop: 10,
     width: 220,
     borderRadius: 10,
   },
