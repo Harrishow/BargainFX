@@ -12,19 +12,11 @@ const PaymentScreen: React.FC = ({ }) => {
       <Text style={styles.title}>Selecione o Método de Pagamento:</Text>
 
       <View style={styles.buttonContainer}>
-        <Button title="Cartão de Crédito" onPress={() => handlePaymentMethod('Cartão de Crédito')}
-        color= '#dc2626' />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Cartão de Débito" onPress={() => handlePaymentMethod('Cartão de Débito')}
+        <Button title="Cartão de Crédito" onPress={() => handlePaymentMethod('Cartão de Crédito/Débito')}
         color= '#dc2626' />
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Pix" onPress={() => handlePaymentMethod('Pix')}
-        color= '#dc2626' />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Boleto Bancário" onPress={() => handlePaymentMethod('Boleto Bancário')}
         color= '#dc2626' />
       </View>
       <View style={styles.buttonContainer}>

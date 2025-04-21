@@ -4,6 +4,7 @@ import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { LoginScreenNavigationProp } from '../types/navigation';
 import LoginButton from '../components/LoginButton';
+import CustomButton from '../components/LoginButton';
 
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
@@ -96,6 +97,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 disabled={isSubmitting}
               />
             </View>
+            
           )}
         </Formik>
       </View>
