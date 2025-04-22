@@ -6,6 +6,8 @@ import ProductDetailScreen from '../screens/ProductDetailScreen';
 import CartScreen from '../screens/CartScreen';
 import PaymentScreen from '../screens/PaymentScreen';
 import { RootStackParamList } from '../types/navigation';
+import RegisterScreen from '../screens/RegisterScreen';
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -17,6 +19,7 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
       <Stack.Screen name="Cart" component={CartScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   );
 };

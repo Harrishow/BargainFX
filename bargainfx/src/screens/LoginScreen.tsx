@@ -4,7 +4,9 @@ import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { LoginScreenNavigationProp } from '../types/navigation';
 import LoginButton from '../components/LoginButton';
-import CustomButton from '../components/LoginButton';
+import { Button } from 'react-native';
+import CustomButton2 from '../components/CustomButton2';
+
 
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
@@ -96,6 +98,13 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 textStyle={styles.loginButtonText}
                 disabled={isSubmitting}
               />
+              <CustomButton2 
+                title="Cadastre-se" 
+                onPress={() => navigation.navigate('Register')}
+                buttonStyle={styles.registerButton}
+                textStyle={styles.registerButtonText} 
+              />
+    
             </View>
             
           )}
@@ -147,6 +156,18 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#fff',
   },
+  registerButton: {
+    backgroundColor: '#ffe2e0',
+    marginTop: 10,
+    marginLeft: 1,
+    width: 258,
+    borderRadius: 10,
+    borderColor: '#FF6347',
+    borderWidth: 1,
+  },
+  registerButtonText: {
+    color: '#FF6347',
+  }
   
 });
 

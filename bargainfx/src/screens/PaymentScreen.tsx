@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
+import { Vibration } from 'react-native';
+import PaymentButton from '../components/PaymentButton';
 
 const PaymentScreen: React.FC = ({ }) => {
   const handlePaymentMethod = (method: string) => {
+    Vibration.vibrate(1000);
     alert(`Método de pagamento selecionado: ${method}`);
     
   };
@@ -11,18 +14,19 @@ const PaymentScreen: React.FC = ({ }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Selecione o Método de Pagamento:</Text>
 
-      <View style={styles.buttonContainer}>
-        <Button title="Cartão de Crédito" onPress={() => handlePaymentMethod('Cartão de Crédito/Débito')}
-        color= '#dc2626' />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Pix" onPress={() => handlePaymentMethod('Pix')}
-        color= '#dc2626' />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title="Dinheiro" onPress={() => handlePaymentMethod('Dinheiro')}
-        color= '#dc2626' />
-      </View>
+      <PaymentButton
+        title="Cartão 💳"
+        onPress={() => handlePaymentMethod('Cartão de Crédito/Débito')}
+      />
+      <PaymentButton
+        title="Pix ❖"
+        onPress={() => handlePaymentMethod('Pix')}
+      /> 
+      <PaymentButton
+        title="Dinheiro 💵"
+        onPress={() => handlePaymentMethod('Dinheiro')}
+      />
+
     </View>
   );
 };
@@ -46,6 +50,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
+
+
+
 });
 
 export default PaymentScreen;
