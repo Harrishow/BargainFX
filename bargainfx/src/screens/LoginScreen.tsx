@@ -14,7 +14,7 @@ const LoginSchema = Yup.object().shape({
     .matches(/^Harrison$/, 'Login incorreto'),
   password: Yup.string()
     .required('Senha é obrigatória')
-    .matches(/^12345678$/, 'Senha incorreta'),
+    .matches(/^1234$/, 'Senha incorreta'),
 });
 
 interface LoginFormValues {
@@ -38,7 +38,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     actions: FormikHelpers<LoginFormValues>
   ) => {
     setTimeout(() => {
-      if (values.login === 'Harrison' && values.password === '12345678') {
+      if (values.login === 'Harrison' && values.password === '1234') {
         alert('Login bem-sucedido!');
         navigation.navigate('ProductList');
       } else {
