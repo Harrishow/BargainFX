@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Text, ImageBackground } from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { LoginScreenNavigationProp } from '../types/navigation';
-import LoginButton from '../components/LoginButton';
-import { Button } from 'react-native';
-import CustomButton2 from '../components/CustomButton2';
+import { LoginScreenNavigationProp } from '../../types/navigation';
+import LoginButton from '../../components/LoginButton';
+import CustomButton2 from '../../components/CustomButton2';
+import { Link, useRouter } from 'expo-router';
+
+
 
 
 const LoginSchema = Yup.object().shape({
@@ -33,23 +35,29 @@ interface LoginScreenProps {
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
+  const router = useRouter();
+
   const handleLogin = (
     values: LoginFormValues,
     actions: FormikHelpers<LoginFormValues>
   ) => {
     setTimeout(() => {
       if (values.login === 'Harrison' && values.password === '1234') {
-        alert('Login bem-sucedido!');
-        navigation.navigate('ProductList');
-      } else {
         alert('Credenciais inválidas!');
+        router.push('../HomeScreen/ProductListScreen');
+        alert('Login bem-sucedido!');
       }
       actions.setSubmitting(false);
     }, 1000);
   };
 
   return (
-    
+    <ImageBackground
+      source={require('../assets/BackgroundLogin.jpg')}
+      style={styles.background}
+      resizeMode="cover"
+      blurRadius={8}
+    >
       <View style={styles.overlay}>
         <Formik
           initialValues={initialValues}
@@ -67,7 +75,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           }) => (
             <View>
               <Text style={styles.title}>BargainFX</Text>
-
               <TextInput
                 style={styles.input}
                 placeholder="Login"
@@ -90,7 +97,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               {touched.password && errors.password && (
                 <Text style={styles.error}>{errors.password}</Text>
               )}
-
               <LoginButton
                 title={isSubmitting ? 'Entrando...' : 'Entrar'}
                 onPress={() => handleSubmit()}
@@ -104,13 +110,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 buttonStyle={styles.registerButton}
                 textStyle={styles.registerButtonText} 
               />
-    
+              <Link href="RegisterScreens/ResetPassScreen" style={{ marginTop: 10, alignSelf: 'center', color: 'white' }}>
+                <Text>Esqueceu a senha? Clique aqui!</Text>
+              </Link>
             </View>
-            
           )}
         </Formik>
       </View>
-   
+    </ImageBackground>
   );
 };
 
@@ -118,23 +125,29 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   overlay: {
     flex: 1,
-    backgroundColor: '#ffeee0',
-    justifyContent: 'flex-start',
+    backgroundColor: 'rgba(90, 90, 90, 0.25)',
+    justifyContent: 'center',
+    width: '100%',
     padding: 50,
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
     marginBottom: 25,
     textAlign: 'center',
   },
   input: {
-    height: 40,
+    height: 50,
+    width: '90%',
+    alignSelf: 'center',
     borderColor: 'black',
+    backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
     marginBottom: 12,
@@ -144,12 +157,14 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 12,
     marginBottom: 8,
+    
   },
   loginButton: {
     backgroundColor: '#dc2626',
-    marginTop: 15,
-    width: 258,
+    marginTop: 10,
+    width: 240,
     height: 45,
+    alignSelf: 'center',
     borderWidth: 1,
     borderRadius: 10,
   },
@@ -159,8 +174,9 @@ const styles = StyleSheet.create({
   registerButton: {
     backgroundColor: '#ffe2e0',
     marginTop: 10,
-    marginLeft: 1,
-    width: 258,
+    width: 240,
+    height: 45,
+    alignSelf: 'center',
     borderRadius: 10,
     borderColor: '#FF6347',
     borderWidth: 1,

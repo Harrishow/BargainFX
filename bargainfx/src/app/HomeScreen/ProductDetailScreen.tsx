@@ -1,32 +1,42 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { ProductDetailScreenRouteProp } from '../types/navigation';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Product } from '../../types/Product';
+import { CartProvider } from '../../context/CartContext';
 
-interface ProductDetailScreenProps {
-  route: ProductDetailScreenRouteProp;
-  navigation: any;
-  buttonTitle?: string;
-  buttonColor?: string;
-  buttonStyle?: object;
-  buttonTextStyle?: object;
-}
-
-const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ 
-  route, 
-  navigation, 
-  buttonTitle = "Adicionar ao carrinho", 
+// Componente interno que usa useCart
+const ProductDetailContent = ({
+  buttonTitle = "Adicionar ao carrinho",
   buttonColor = "#dc2626",
   buttonStyle = {},
   buttonTextStyle = {}
 }) => {
-  const { product } = route.params;
+  const router = useRouter();
+  const params = useLocalSearchParams<{
+    id: string | string[];
+    name: string | string[];
+    description: string | string[];
+    price: string | string[];
+    image: string | string[];
+  }>();
+
+  const product: Product = {
+    id: typeof params.id === 'string' ? params.id : params.id?.[0] ?? '',
+    name: typeof params.name === 'string' ? params.name : params.name?.[0] ?? '',
+    description: typeof params.description === 'string' ? params.description : params.description?.[0] ?? '',
+    price: typeof params.price === 'string'
+      ? parseFloat(params.price)
+      : parseFloat(params.price?.[0] ?? '0'),
+    image: typeof params.image === 'string' ? params.image : params.image?.[0] ?? '',
+  };
+
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     addToCart(product);
     alert(`${product.name} adicionado ao carrinho!`);
-    navigation.navigate('Cart');
+    router.push('../PaymentScreens/CartScreen');
   };
 
   return (
@@ -34,9 +44,8 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.description}>{product.description}</Text>
-      <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+      <Text style={styles.price}>R$ {product.price.toFixed(2)}</Text>
 
-      {}
       <TouchableOpacity 
         style={[styles.button, { backgroundColor: buttonColor }, buttonStyle]} 
         onPress={handleAddToCart}
@@ -47,6 +56,15 @@ const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({
   );
 };
 
+
+export default function ProductDetailScreen(props: any) {
+  return (
+    <CartProvider>
+      <ProductDetailContent {...props} />
+    </CartProvider>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: '100%',
+    width: '90%',
     height: 200,
     resizeMode: 'cover',
     marginBottom: 20,
@@ -93,5 +111,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default ProductDetailScreen;

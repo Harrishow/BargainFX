@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { Vibration } from 'react-native';
-import PaymentButton from '../components/PaymentButton';
+import PaymentButton from '../../components/PaymentButton';
 
 const PaymentScreen: React.FC = ({ }) => {
   const handlePaymentMethod = (method: string) => {
