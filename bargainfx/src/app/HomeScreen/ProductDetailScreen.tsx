@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { useCart } from '../../context/CartContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Product } from '../../types/Product';
@@ -41,6 +41,7 @@ const ProductDetailContent = ({
 
   return (
     <View style={styles.container}>
+      
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.description}>{product.description}</Text>
@@ -52,6 +53,8 @@ const ProductDetailContent = ({
       >
         <Text style={[styles.buttonText, buttonTextStyle]}>{buttonTitle}</Text>
       </TouchableOpacity>
+      
+      
     </View>
   );
 };
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '90%',
-    height: 200,
+    height: 220,
     resizeMode: 'cover',
     marginBottom: 20,
   },
@@ -103,11 +106,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
-    width: 220,
+    width: 240,
   },
   buttonText: {
     fontSize: 18,
     color: '#fff',
+    alignItems: 'center',
     fontWeight: 'bold',
   },
 });

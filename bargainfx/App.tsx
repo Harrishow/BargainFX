@@ -5,11 +5,13 @@ import { CartProvider } from './src/context/CartContext';
 
 const App: React.FC = () => {
   return (
+
     <CartProvider>
       <NavigationContainer>
         <AppNavigator />
       </NavigationContainer>
     </CartProvider>
+
   );
 };
 

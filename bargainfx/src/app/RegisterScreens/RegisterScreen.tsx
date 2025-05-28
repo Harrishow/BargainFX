@@ -1,3 +1,4 @@
+import MaskInput, { Masks } from 'react-native-mask-input';
 import React from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 import { Formik } from 'formik';
@@ -61,20 +62,19 @@ const RegisterScreen = () => {
               <Text style={styles.error}>{errors.fullName}</Text>
             )}
 
-            {/* CPF */}
-            <TextInput
+            <MaskInput
               style={styles.input}
               placeholder="CPF (000.000.000-00)"
+              value={values.cpf}
               onChangeText={handleChange('cpf')}
               onBlur={handleBlur('cpf')}
-              value={values.cpf}
+              mask={Masks.BRL_CPF}
               keyboardType="numeric"
             />
             {touched.cpf && errors.cpf && (
               <Text style={styles.error}>{errors.cpf}</Text>
             )}
-
-            {/* Endereço */}
+            
             <Text style={styles.sectionTitle}>Endereço</Text>
             
             <TextInput

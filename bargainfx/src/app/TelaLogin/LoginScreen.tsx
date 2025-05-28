@@ -13,10 +13,10 @@ import { Link, useRouter } from 'expo-router';
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
     .required('Login é obrigatório')
-    .matches(/^Harrison$/, 'Login incorreto'),
+    .matches(/^harrison@email.com$/, 'Login incorreto'),
   password: Yup.string()
     .required('Senha é obrigatória')
-    .matches(/^1234$/, 'Senha incorreta'),
+    .matches(/^12345678$/, 'Senha incorreta'),
 });
 
 interface LoginFormValues {
@@ -42,7 +42,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     actions: FormikHelpers<LoginFormValues>
   ) => {
     setTimeout(() => {
-      if (values.login === 'Harrison' && values.password === '1234') {
+      if (values.login === 'harrison@email.com' && values.password === '12345678') {
         alert('Credenciais inválidas!');
         router.push('../HomeScreen/ProductListScreen');
         alert('Login bem-sucedido!');
@@ -74,7 +74,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             isSubmitting,
           }) => (
             <View>
-              <Text style={styles.title}>BargainFX</Text>
+              <Text style={styles.borderedText}>BargainFX</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Login"
@@ -105,12 +105,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 disabled={isSubmitting}
               />
               <CustomButton2 
-                title="Cadastre-se" 
-                onPress={() => navigation.navigate('Register')}
+                title="Ou Cadastre-se" 
+                onPress={() => router.push('../RegisterScreens/RegisterScreen')}
                 buttonStyle={styles.registerButton}
                 textStyle={styles.registerButtonText} 
               />
-              <Link href="RegisterScreens/ResetPassScreen" style={{ marginTop: 10, alignSelf: 'center', color: 'white' }}>
+              <Link href="RegisterScreens/RegisterScreen" style={{ marginTop: 10, alignSelf: 'center', color: 'white' }}>
                 <Text>Esqueceu a senha? Clique aqui!</Text>
               </Link>
             </View>
@@ -135,16 +135,19 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 50,
   },
-  title: {
-    fontSize: 40,
+  borderedText: {
+    fontSize: 50,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'rgb(255, 230, 230)',
+    textShadowColor: 'black',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
     marginBottom: 25,
     textAlign: 'center',
   },
   input: {
     height: 50,
-    width: '90%',
+    width: '120%',
     alignSelf: 'center',
     borderColor: 'black',
     backgroundColor: 'white',
@@ -162,27 +165,29 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: '#dc2626',
     marginTop: 10,
-    width: 240,
-    height: 45,
+    width: 160,
+    height: 60,
     alignSelf: 'center',
     borderWidth: 1,
     borderRadius: 10,
   },
   loginButtonText: {
     color: '#fff',
+    fontSize: 18,
   },
   registerButton: {
     backgroundColor: '#ffe2e0',
     marginTop: 10,
-    width: 240,
-    height: 45,
+    width: 190,
+    height: 50,
     alignSelf: 'center',
     borderRadius: 10,
-    borderColor: '#FF6347',
+    borderColor: 'black',
     borderWidth: 1,
   },
   registerButtonText: {
     color: '#FF6347',
+    fontSize: 18,
   }
   
 });

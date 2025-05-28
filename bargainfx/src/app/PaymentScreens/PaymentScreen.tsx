@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { Vibration } from 'react-native';
 import PaymentButton from '../../components/PaymentButton';
+import { useRouter } from 'expo-router';
+
+
+
+const router = useRouter();
 
 const PaymentScreen: React.FC = ({ }) => {
   const handlePaymentMethod = (method: string) => {
@@ -16,15 +21,15 @@ const PaymentScreen: React.FC = ({ }) => {
 
       <PaymentButton
         title="Cartão 💳"
-        onPress={() => handlePaymentMethod('Cartão de Crédito/Débito')}
+        onPress={() => router.push("../ResumoPedido/OrderSummary")}
       />
       <PaymentButton
         title="Pix ❖"
-        onPress={() => handlePaymentMethod('Pix')}
+        onPress={() => router.push("../ResumoPedido/OrderSummary")}
       /> 
       <PaymentButton
         title="Dinheiro 💵"
-        onPress={() => handlePaymentMethod('Dinheiro')}
+        onPress={() => router.push("../ResumoPedido/OrderSummary")}
       />
 
     </View>

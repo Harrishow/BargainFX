@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#ffeee0',
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -130,10 +131,9 @@ const styles = StyleSheet.create({
   },
   paymentButton: {
     backgroundColor: '#dc2626',
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 10,
     width: 240,
-    marginLeft: 43,
   },
   paymentButtonText: {
     color: '#ffffff',
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
   productlistButton: {
     backgroundColor: '#ffe2e0',
     marginTop: 20,
-    marginLeft: 43,
     width: 240,
     borderRadius: 10,
     borderColor: '#FF6347',
