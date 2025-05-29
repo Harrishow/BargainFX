@@ -12,7 +12,7 @@ export default function Home (props: any) {
             blurRadius={5}>
 
         <View style={{flex:1, justifyContent: 'space-around', alignItems: 'center'}}>
-            <Text style={styles.title}>Olá, seja bem vindo ao BargainFX!</Text>
+            <Text style={styles.title}>Olá, seja bem vindo{"(a)"} ao BargainFX!</Text>
             <Text style={styles.subTitle}>Diversos produtos Enerdev {"</>"} pra você aproveitar ao máximo!</Text>
             <Text style={styles.subTitle2}>Aproveite nossos produtos e garanta um bom desconto na hora da compra!</Text>
       
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 240,
     borderRadius: 5,
-    marginTop: 20,
+    marginTop: -150,
   },
   indexButtonText: {
     color: '#fff',
@@ -51,21 +51,21 @@ const styles = StyleSheet.create({
   title: {
     
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: 'black',
-    marginTop: 50,
+    color: 'rgb(80, 0, 0)',
+    marginTop: -50,
   },
   subTitle: {
-    
+    marginTop: -100,
     textAlign: 'center',
     fontSize: 18,
-    width: 390,
+    width: 270,
     fontWeight: 'bold',
     color: 'black',
   },
   subTitle2: {
-    
+    marginTop: -170,
     textAlign: 'center',
     fontSize: 18,
     width: 390,

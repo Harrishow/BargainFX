@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet, ImageSourcePropType } from 'react-native';
+import { View, FlatList, StyleSheet, TextInput, ImageBackground } from 'react-native';
 import ProductItem from '../../components/ProductItem';
 import { Product } from '../../types/Product';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const ProductListScreen: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const router = useRouter();
+
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const mockProducts: Product[] = [
@@ -72,7 +76,7 @@ const ProductListScreen: React.FC = () => {
 
   const handleProductPress = (product: Product) => {
     router.push({
-      pathname: '/HomeScreen/ProductDetailScreen',
+      pathname: '/MainScreens/ProductDetailScreen',
       params: {
         id: product.id,
         name: product.name,
@@ -84,26 +88,77 @@ const ProductListScreen: React.FC = () => {
   };
 
   return (
+
     <View style={styles.container}>
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ProductItem
-            product={item}
-            onPress={() => handleProductPress(item)}
+
+      <ImageBackground
+        source={require('../assets/icon.png')}
+        style={styles.background}
+        blurRadius={5}
+        resizeMode="cover"
+      >
+        <Ionicons name="search" size={20} color="#888" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Pesquisar"
+          value={search}
+          onChangeText={setSearch}
+        />
+        <View style={styles.container2}>
+          <FlatList
+            data={products}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ProductItem
+                product={item}
+                onPress={() => handleProductPress(item)}
+              />
+            )}
           />
-        )}
-      />
+        </View>
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container2: {
+    flex: 1,
+    backgroundColor: 'rgb(250, 242, 218)',
+    padding: 16,
+    marginTop: 10,
+    justifyContent: 'flex-end'
+  },
   container: {
     flex: 1,
-    backgroundColor: '#ffeee0',
-    padding: 16,
+    backgroundColor: 'rgb(253, 236, 185)',
+    padding: 1,
+    justifyContent: 'flex-end',
+  },
+  input: {
+    height: 45,
+    opacity: 0.9,
+    marginTop: 50,
+    width: '90%',
+    alignSelf: 'center',
+    paddingHorizontal: 35,
+    borderColor: 'black',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  icon: {
+    marginRight: 8,
+    position: 'absolute',
+    top: 60,
+    left: '8%',
+    zIndex: 1,
+  },
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '20%',
+    alignSelf: 'center',
   },
 });
 

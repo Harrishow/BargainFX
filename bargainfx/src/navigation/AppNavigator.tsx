@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../app/TelaLogin/LoginScreen';
-import ProductListScreen from '../app/HomeScreen/ProductListScreen';
-import ProductDetailScreen from '../app/HomeScreen/ProductDetailScreen';
-import CartScreen from '../app/PaymentScreens/CartScreen';
-import PaymentScreen from '../app/PaymentScreens/PaymentScreen';
+import ProductListScreen from '../app/MainScreens/ProductListScreen';
+import ProductDetailScreen from '../app/MainScreens/ProductDetailScreen';
+import CartScreen from '../app/MainScreens/CartScreen';
+import PaymentScreen from '../app/MainScreens/PaymentScreen';
 import { RootStackParamList } from '../types/navigation';
 import RegisterScreen from '../app/RegisterScreens/RegisterScreen';
 

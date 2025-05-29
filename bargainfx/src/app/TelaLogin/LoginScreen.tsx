@@ -13,10 +13,10 @@ import { Link, useRouter } from 'expo-router';
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
     .required('Login é obrigatório')
-    .matches(/^harrison@email.com$/, 'Login incorreto'),
+    .matches(/^harri$/, 'Login incorreto'),
   password: Yup.string()
     .required('Senha é obrigatória')
-    .matches(/^12345678$/, 'Senha incorreta'),
+    .matches(/^1234$/, 'Senha incorreta'),
 });
 
 interface LoginFormValues {
@@ -42,9 +42,9 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     actions: FormikHelpers<LoginFormValues>
   ) => {
     setTimeout(() => {
-      if (values.login === 'harrison@email.com' && values.password === '12345678') {
+      if (values.login === 'harri' && values.password === '1234') {
         alert('Credenciais inválidas!');
-        router.push('../HomeScreen/ProductListScreen');
+        router.push('../MainScreens/ProductListScreen');
         alert('Login bem-sucedido!');
       }
       actions.setSubmitting(false);
@@ -77,7 +77,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               <Text style={styles.borderedText}>BargainFX</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Login"
+                placeholder="E-mail"
                 onChangeText={handleChange('login')}
                 onBlur={handleBlur('login')}
                 value={values.login}
@@ -98,7 +98,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 <Text style={styles.error}>{errors.password}</Text>
               )}
               <LoginButton
-                title={isSubmitting ? 'Entrando...' : 'Entrar'}
+                title={isSubmitting ? 'Entrando...' : 'Entrar no App'}
                 onPress={() => handleSubmit()}
                 buttonStyle={styles.loginButton}
                 textStyle={styles.loginButtonText}
@@ -110,7 +110,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 buttonStyle={styles.registerButton}
                 textStyle={styles.registerButtonText} 
               />
-              <Link href="RegisterScreens/RegisterScreen" style={{ marginTop: 10, alignSelf: 'center', color: 'white' }}>
+              <Link href="RegisterScreens/ResetPass" style={{ marginTop: 10, alignSelf: 'center', color: 'white' }}>
                 <Text>Esqueceu a senha? Clique aqui!</Text>
               </Link>
             </View>
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: '#dc2626',
     marginTop: 10,
-    width: 160,
+    width: 170,
     height: 60,
     alignSelf: 'center',
     borderWidth: 1,

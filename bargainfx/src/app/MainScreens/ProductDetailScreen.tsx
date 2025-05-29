@@ -5,7 +5,8 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Product } from '../../types/Product';
 import { CartProvider } from '../../context/CartContext';
 
-// Componente interno que usa useCart
+
+
 const ProductDetailContent = ({
   buttonTitle = "Adicionar ao carrinho",
   buttonColor = "#dc2626",
@@ -36,11 +37,13 @@ const ProductDetailContent = ({
   const handleAddToCart = () => {
     addToCart(product);
     alert(`${product.name} adicionado ao carrinho!`);
-    router.push('../PaymentScreens/CartScreen');
+    router.push('../MainScreens/CartScreen');
   };
 
   return (
     <View style={styles.container}>
+
+      
       
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text style={styles.name}>{product.name}</Text>

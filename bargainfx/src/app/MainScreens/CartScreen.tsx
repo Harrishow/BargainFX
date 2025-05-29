@@ -14,11 +14,11 @@ const CartContent: React.FC = () => {
   const router = useRouter();
 
   const handleGoToPayment = () => {
-    router.push('/PaymentScreens/PaymentScreen');
+    router.push('/MainScreens/PaymentScreen');
   };
 
   const handleGoToProductList = () => {
-    router.push('../HomeScreen/ProductListScreen');
+    router.push('../MainScreens/ProductListScreen');
   };
 
   return (

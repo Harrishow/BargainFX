@@ -6,14 +6,20 @@ import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types/navigation';
+import  CustomButton  from '../../components/CustomButton';
+import { router } from 'expo-router';
 
 
 
 const RegisterScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const handleGoToLoginScreen = () => {
+    router.push('../TelaLogin/LoginScreen');
+  };
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Nome completo é obrigatório'),
+    email: Yup.string().required('Email é obrigatório'),
     cpf: Yup.string()
       .matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'CPF inválido')
       .required('CPF é obrigatório'),
@@ -26,7 +32,7 @@ const RegisterScreen = () => {
       .required('Estado é obrigatório'),
     password: Yup.string()
       .min(6, 'Senha deve ter no mínimo 6 caracteres')
-      .required('Senha é obrigatória'),
+      .required('Senha é obrigatória e deve conter pelo menos 8 caracteres'),
   });
 
   return (
@@ -34,6 +40,7 @@ const RegisterScreen = () => {
       <Formik
         initialValues={{
           fullName: '',
+          email: '',
           cpf: '',
           street: '',
           number: '',
@@ -50,7 +57,7 @@ const RegisterScreen = () => {
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <View>
-            {/* Nome Completo */}
+            <Text style={styles.sectionTitle}>Dados Pessoais</Text>
             <TextInput
               style={styles.input}
               placeholder="Nome Completo"
@@ -60,6 +67,17 @@ const RegisterScreen = () => {
             />
             {touched.fullName && errors.fullName && (
               <Text style={styles.error}>{errors.fullName}</Text>
+            )}
+            
+            <TextInput
+              style={styles.input}
+              placeholder="E-mail"
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            {touched.email && errors.email && (
+              <Text style={styles.error}>{errors.email}</Text>
             )}
 
             <MaskInput
@@ -127,7 +145,7 @@ const RegisterScreen = () => {
             {/* Senha */}
             <TextInput
               style={styles.input}
-              placeholder="Crie sua senha"
+              placeholder="Crie uma senha"
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
@@ -136,10 +154,13 @@ const RegisterScreen = () => {
             {touched.password && errors.password && (
               <Text style={styles.error}>{errors.password}</Text>
             )}
+             <CustomButton
+                title="Finalizar Cadastro"
+                onPress={handleGoToLoginScreen}
+                buttonStyle={styles.finalizarButton}
+                textStyle={styles.finalizarButtonText}
+             />
 
-            <Button title="Cadastrar" onPress={() => handleSubmit()}
-            color="#dc2626"
-              />
           </View>
         )}
       </Formik>
@@ -161,10 +182,11 @@ const styles = StyleSheet.create({
     input: {
       height: 40,
       borderColor: 'gray',
+      backgroundColor: '#fff',
       borderWidth: 1,
       marginBottom: 10,
       paddingHorizontal: 10,
-      borderRadius: 5,
+      borderRadius: 10,
     },
     error: {
       color: 'red',
@@ -172,6 +194,7 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
       fontSize: 18,
+      textAlign: 'center',
       fontWeight: 'bold',
       marginVertical: 10,
     },
@@ -183,6 +206,20 @@ const styles = StyleSheet.create({
     halfInput: {
       flex: 1,
       marginRight: 5,
+    },
+    finalizarButton: {
+      backgroundColor: '#dc2626',
+      padding: 10,
+      width: 200,
+      alignSelf: 'center',
+      borderRadius: 5,
+      marginTop: 20,
+    },
+    finalizarButtonText: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
     },
   });
 
