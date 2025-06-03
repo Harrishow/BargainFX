@@ -21,24 +21,26 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ title, onPress, buttonSty
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#dc2626',
-    paddingVertical: 30,
+    backgroundColor: 'rgba(172, 0, 0, 0.9)', // Green with opacity
+    paddingVertical: 10,
     marginTop: 10,
     paddingHorizontal: 24,
-    marginLeft: 50,
-    width: '70%',
-    borderRadius: 8,
-    borderBottomColor: '#6200ee',
+    width: '50%',
+    height: 60,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: 'black',
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     
   },
   text: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
+
   },
 });
 

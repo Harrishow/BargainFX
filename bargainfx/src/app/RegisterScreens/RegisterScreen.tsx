@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
       marginRight: 5,
     },
     finalizarButton: {
-      backgroundColor: '#dc2626',
+      backgroundColor: 'rgba(172, 0, 0, 0.9)',
       padding: 10,
       width: 200,
       alignSelf: 'center',

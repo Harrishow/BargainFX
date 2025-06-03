@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     
   },
   indexButton: {
-    backgroundColor: '#dc2626',
+    backgroundColor: 'rgba(172, 0, 0, 0.9)',
     padding: 10,
     width: 240,
     borderRadius: 5,

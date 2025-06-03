@@ -13,10 +13,10 @@ import { Link, useRouter } from 'expo-router';
 const LoginSchema = Yup.object().shape({
   login: Yup.string()
     .required('Login é obrigatório')
-    .matches(/^harri$/, 'Login incorreto'),
+    .matches(/^harrison@gmail.com$/, 'Login incorreto'),
   password: Yup.string()
     .required('Senha é obrigatória')
-    .matches(/^1234$/, 'Senha incorreta'),
+    .matches(/^12345678$/, 'Senha incorreta'),
 });
 
 interface LoginFormValues {
@@ -42,7 +42,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     actions: FormikHelpers<LoginFormValues>
   ) => {
     setTimeout(() => {
-      if (values.login === 'harri' && values.password === '1234') {
+      if (values.login === 'harrison@gmail.com' && values.password === '12345678') {
         alert('Credenciais inválidas!');
         router.push('../MainScreens/ProductListScreen');
         alert('Login bem-sucedido!');
@@ -74,7 +74,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             isSubmitting,
           }) => (
             <View>
-              <Text style={styles.borderedText}>BargainFX</Text>
+              <Text style={styles.borderedText}>EnerDev {'</>'} </Text>
               <TextInput
                 style={styles.input}
                 placeholder="E-mail"
@@ -157,13 +157,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   error: {
-    color: 'black',
+    color: 'white',
     fontSize: 12,
+    fontWeight: 'bold',
     marginBottom: 8,
     
   },
   loginButton: {
-    backgroundColor: '#dc2626',
+    backgroundColor: 'rgba(172, 0, 0, 0.9)',
     marginTop: 10,
     width: 170,
     height: 60,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   registerButtonText: {
-    color: '#FF6347',
+    color: 'rgba(172, 0, 0, 0.9)',
     fontSize: 18,
   }
   

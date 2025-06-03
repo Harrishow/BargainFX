@@ -9,7 +9,7 @@ import { CartProvider } from '../../context/CartContext';
 
 const ProductDetailContent = ({
   buttonTitle = "Adicionar ao carrinho",
-  buttonColor = "#dc2626",
+  buttonColor = "rgba(172, 0, 0, 0.9)",
   buttonStyle = {},
   buttonTextStyle = {}
 }) => {
@@ -42,8 +42,6 @@ const ProductDetailContent = ({
 
   return (
     <View style={styles.container}>
-
-      
       
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text style={styles.name}>{product.name}</Text>

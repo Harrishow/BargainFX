@@ -7,7 +7,7 @@ import CustomButton2 from '../../components/CustomButton2';
 import { useRouter } from 'expo-router';
 import { CartProvider } from '../../context/CartContext';
 
-// Componente interno que usa useCart
+
 const CartContent: React.FC = () => {
   const { cartItems, removeFromCart, totalPrice } = useCart();
   console.log('Itens do carrinho:', cartItems);
@@ -73,7 +73,7 @@ const CartContent: React.FC = () => {
   );
 };
 
-// Componente principal que envolve o conteúdo com CartProvider
+
 const CartScreen: React.FC = () => {
   return (
     <CartProvider>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   paymentButton: {
-    backgroundColor: '#dc2626',
+    backgroundColor: 'rgba(172, 0, 0, 0.9)',
     marginTop: 10,
     borderRadius: 10,
     width: 240,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   productlistButtonText: {
-    color: '#000000',
+    color: 'rgba(172, 0, 0, 0.9)',
   },
   emptyMessage: {
     fontSize: 16,

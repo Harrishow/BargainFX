@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     backgroundColor: '#ffeee0',
   },
   title: {
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
-
 
 
 });

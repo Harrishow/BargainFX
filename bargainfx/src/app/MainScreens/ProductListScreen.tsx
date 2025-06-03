@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'rgb(253, 236, 185)',
+    backgroundColor: 'rgb(250, 242, 218)',
     padding: 1,
     justifyContent: 'flex-end',
   },
